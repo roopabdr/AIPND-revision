@@ -2,9 +2,9 @@
 # -*- coding: utf-8 -*-
 # */AIPND-revision/intropyproject-classify-pet-images/print_results.py
 #                                                                             
-# PROGRAMMER: 
-# DATE CREATED:
-# REVISED DATE: 
+# PROGRAMMER: Roopa Madihally
+# DATE CREATED: 4th June, 2019
+# REVISED DATE: 4th June, 2019
 # PURPOSE: Create a function print_results that prints the results statistics
 #          from the results statistics dictionary (results_stats_dic). It 
 #          should also allow the user to be able to print out cases of misclassified
@@ -31,6 +31,12 @@
 #       Notice that this function doesn't to return anything because it  
 #       prints a summary of the results using results_dic and results_stats_dic
 # 
+
+# from get_pet_labels import get_pet_labels
+# from classify_images import classify_images
+# from adjust_results4_isadog import adjust_results4_isadog
+# from calculates_results_stats import calculates_results_stats
+
 def print_results(results_dic, results_stats_dic, model, 
                   print_incorrect_dogs = False, print_incorrect_breed = False):
     """
@@ -62,5 +68,30 @@ def print_results(results_dic, results_stats_dic, model,
     Returns:
            None - simply printing results.
     """    
-    None
+    print('Model used: ', model)
+    print('Number of Images: ', results_stats_dic.get('n_images'))
+    print('Number of Dog Images: ', results_stats_dic.get('n_dogs_img'))
+    print('Number of "Not-a" Dog Images: ', results_stats_dic.get('n_notdogs_img'))
+    print('% Correct Dogs: ', results_stats_dic.get('n_correct_dogs'))
+    print('% Correct Breed: ', results_stats_dic.get('n_correct_breed'))
+    print('% Correct "Not-a" Dog: ', results_stats_dic.get('n_correct_notdogs'))
+    print('% Match: ', results_stats_dic.get('pct_match'))
+
+    if print_incorrect_dogs and ( (results_stats_dic['n_correct_dogs'] + results_stats_dic['n_correct_notdogs']) != results_stats_dic['n_images'] ):
+        print("\nINCORRECT Dog/NOT Dog Assignments:")
+        # process through results dict, printing incorrectly classified dogs
+        for key in results_dic:
+            if sum(results_dic[key][3:]) == 1:
+                print("Real: {:>26}   Classifier: {:>30}".format(results_dic[key][0], results_dic[key][1]))
+    
+    if (print_incorrect_breed and (results_stats_dic['n_correct_dogs'] != results_stats_dic['n_correct_breed'])):
+        print("\nINCORRECT Dog Breed Assignment:")
+        # process through results dict, printing incorrectly classified breeds
+        for key in results_dic:
+            if sum(results_dic[key][3:]) == 2 and results_dic[key][2] == 0:
+                print("Real: {:>26}   Classifier: {:>30}".format(results_dic[key][0], results_dic[key][1]))
                 
+# results = get_pet_labels('pet_images/')
+# classify_images('pet_images/', results, 'vgg')
+# adjust_results4_isadog(results, 'dognames.txt')
+# calculates_results_stats(results)

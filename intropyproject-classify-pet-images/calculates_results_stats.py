@@ -2,9 +2,9 @@
 # -*- coding: utf-8 -*-
 # */AIPND-revision/intropyproject-classify-pet-images/calculates_results_stats.py
 #                                                                             
-# PROGRAMMER:
-# DATE CREATED:                                  
-# REVISED DATE: 
+# PROGRAMMER: Roopa Madihally
+# DATE CREATED: 4th June, 2019                    
+# REVISED DATE: 4th June, 2019
 # PURPOSE: Create a function calculates_results_stats that calculates the 
 #          statistics of the results of the programrun using the classifier's model 
 #          architecture to classify the images. This function will use the 
@@ -42,6 +42,7 @@
 #       in the return statement with the results_stats_dic dictionary that you create 
 #       with this function
 # 
+
 def calculates_results_stats(results_dic):
     """
     Calculates statistics of the results of the program run using classifier's model 
@@ -67,7 +68,44 @@ def calculates_results_stats(results_dic):
                      and the value is the statistic's value. See comments above
                      and the classroom Item XX Calculating Results for details
                      on how to calculate the counts and statistics.
-    """        
+    """
+    results_stats_dic = dict()
+    n_images = 0 # Z
+    n_correct_dogs = 0 # A
+    n_dogs_img = 0 # B
+    n_correct_notdogs = 0 # C
+    n_notdogs_img = 0 # D
+    n_correct_breed = 0 # E
+    n_match = 0 # Y
+
+    n_images = len(results_dic)
+    n_correct_dogs = len([dog_key for dog_key, dog_value in results_dic.items() if dog_value[3] == 1 and dog_value[4] == 1])
+    n_dogs_img = len([dog_key for dog_key, dog_value in results_dic.items() if dog_value[3] == 1])
+    n_correct_notdogs = len([dog_key for dog_key, dog_value in results_dic.items() if dog_value[3] == 0 and dog_value[4] == 0])
+    n_notdogs_img = len([dog_key for dog_key, dog_value in results_dic.items() if dog_value[3] == 0])
+    n_correct_breed = len([dog_key for dog_key, dog_value in results_dic.items() if dog_value[3] == 1 and dog_value[2] == 1])
+    n_match = len([dog_key for dog_key, dog_value in results_dic.items() if dog_value[2] == 1])
+
+    print(n_images, n_correct_dogs, n_dogs_img, n_correct_notdogs, n_notdogs_img, n_correct_breed, n_match)
+
+    pct_correct_dogs = (n_correct_dogs/n_dogs_img) * 100
+    if n_notdogs_img > 0:
+        pct_correct_notdogs = (n_correct_notdogs/n_notdogs_img) * 100
+    pct_correct_breed = (n_correct_breed/n_dogs_img) * 100
+    pct_match = (n_match/n_images) * 100
+
+    results_stats_dic.update({'n_images': n_images})
+    results_stats_dic.update({'n_correct_dogs': n_correct_dogs})
+    results_stats_dic.update({'n_dogs_img': n_dogs_img})
+    results_stats_dic.update({'n_correct_notdogs': n_correct_notdogs})
+    results_stats_dic.update({'n_notdogs_img': n_notdogs_img})
+    results_stats_dic.update({'n_correct_breed': n_correct_breed})
+    results_stats_dic.update({'n_match': n_match})
+    results_stats_dic.update({'pct_correct_dogs': pct_correct_dogs})
+    results_stats_dic.update({'pct_correct_notdogs': pct_correct_notdogs})
+    results_stats_dic.update({'pct_correct_breed': pct_correct_breed})
+    results_stats_dic.update({'pct_match': pct_match})
+
     # Replace None with the results_stats_dic dictionary that you created with 
     # this function 
-    return None
+    return results_stats_dic
