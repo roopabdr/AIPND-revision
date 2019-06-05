@@ -74,9 +74,17 @@ def adjust_results4_isadog(results_dic, dogfile):
         for line in f:
             dognames_dic.update({line.lower().rstrip(): 1})
 
-    # print(dognames_dic)
+    # print('dognames_dic ::::::: ',dognames_dic)
     for result_key in results_dic:
         # print(results_dic[result_key][0], 1 if results_dic[result_key][0] in dognames_dic else 0)
         # print(results_dic[result_key][1], any(elem in results_dic[result_key][1].split(',') for elem in dognames_dic))
-        results_dic.get(result_key).extend(list([1 if results_dic[result_key][0] in dognames_dic else 0, 1 if any(elem in results_dic[result_key][1].split(',') for elem in dognames_dic) else 0]))
-    # print(results_dic)
+        results_dic.get(result_key).extend(list([1 if results_dic[result_key][0] in dognames_dic else 0, 1 if any(elem in [results_dic[result_key][1]] for elem in dognames_dic) else 0]))
+        # results_dic.get(result_key).extend(list([
+        # 1 if results_dic[result_key][0] in dognames_dic else 0
+        # , 1 if any(key in dognames_dic for key in results_dic[result_key][1]) else 0
+        # ])
+        # )
+        # for result_key, result_value in results_dic.items():
+        #     if dognames_dic.get(result_value[1]):
+
+    # print('adjust_results4_isadog results_dic :::: ', results_dic)

@@ -1,0 +1,70 @@
+Command Line Arguments:
+     dir = uploaded_images/ 
+    arch = alexnet 
+ dogfile = dognames.txt
+
+Pet Image Label Dictionary has 4 key-value pairs.
+Below are 4 of them:
+ 1 key:              Black_bear_01.jpg  label:                 black bear
+ 2 key:              Coffee_mug_01.jpg  label:                 coffee mug
+ 3 key:       Yorkshire_Terrier_01.jpg  label:          yorkshire terrier
+ 4 key:       Yorkshire_Terrier_02.jpg  label:          yorkshire terrier
+
+     MATCH:
+
+             Black_bear_01.jpg: 
+Real:                 black bear   Classifier: american black bear, black bear, ursus americanus, euarctos americanus
+
+             Coffee_mug_01.jpg: 
+Real:                 coffee mug   Classifier:                     coffee mug
+
+      Yorkshire_Terrier_01.jpg: 
+Real:          yorkshire terrier   Classifier:              yorkshire terrier
+
+      Yorkshire_Terrier_02.jpg: 
+Real:          yorkshire terrier   Classifier:              yorkshire terrier
+
+ NOT A MATCH:
+
+# Total Images 4 # Matches: 4 # NOT Matches: 0
+
+     MATCH:
+
+             Black_bear_01.jpg: 
+Real:                 black bear   Classifier: american black bear, black bear, ursus americanus, euarctos americanus  
+PetLabelDog: 0  ClassLabelDog: 0
+
+             Coffee_mug_01.jpg: 
+Real:                 coffee mug   Classifier:                     coffee mug  
+PetLabelDog: 0  ClassLabelDog: 0
+
+      Yorkshire_Terrier_01.jpg: 
+Real:          yorkshire terrier   Classifier:              yorkshire terrier  
+PetLabelDog: 1  ClassLabelDog: 1
+
+      Yorkshire_Terrier_02.jpg: 
+Real:          yorkshire terrier   Classifier:              yorkshire terrier  
+PetLabelDog: 1  ClassLabelDog: 1
+
+ NOT A MATCH:
+
+# Total Images 4 # Matches: 4 # NOT Matches: 0
+4 2 2 2 2 2 4
+
+ ** Statistics from calculates_results_stats() function:
+N Images:  4  N Dog Images:  2  N NotDog Images:  2 
+Pct Corr dog: 100.0 Pct Corr NOTdog: 100.0  Pct Corr Breed: 100.0
+
+ ** Check Statistics - calculated from this function as a check:
+N Images:  4  N Dog Images:  2  N NotDog Images:  2 
+Pct Corr dog: 100.0 Pct Corr NOTdog: 100.0  Pct Corr Breed: 100.0
+Model used:  alexnet
+Number of Images:  4
+Number of Dog Images:  2
+Number of "Not-a" Dog Images:  2
+% Correct Dogs:  2
+% Correct Breed:  2
+% Correct "Not-a" Dog:  2
+% Match:  100.0
+
+** Total Elapsed Runtime: 0:0:0
